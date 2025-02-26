@@ -1,16 +1,16 @@
 import {DotLottieReact} from "@lottiefiles/dotlottie-react";
+import Animation from '../assets/chef.lottie'
 
 const ProgressCircle = ({progress}) => {
 
     const radius = 50;
-    const circumference = 2 * Math.PI * radius // محیط
+    const circumference = 2 * Math.PI * radius
     const strokeDashoffset = circumference - (progress / 100) * circumference
 
     return (
         <div className="flex flex-col items-center justify-center">
             <div className="grid place-items-center w-[310px] h-[310px] relative">
-                <DotLottieReact src="../../public/animations/chef.lottie"
-                                className="w-32 h-32 mb-9"
+                <DotLottieReact src={Animation} className="w-32 h-32 mb-9"
                                 autoplay
                                 loop
                 />
@@ -47,11 +47,11 @@ const ProgressCircle = ({progress}) => {
                         stroke="url(#strokeGradient)"
                         strokeWidth={3}
                         fill="none"
-                        strokeDasharray={circumference}  //مفدار کلی محیط دایره
-                        strokeDashoffset={strokeDashoffset} //مقدار کاهش برای پر شدن دایره
+                        strokeDasharray={circumference}
+                        strokeDashoffset={strokeDashoffset}
                         strokeLinecap="round"
-                        transform="rotate(-90 60 60)" // باعث پرشدن از بالای دایره میشه
-                        className="text-black"
+                        transform="rotate(-90 60 60)"
+                        className="text-black transition-all ease-in-out duration-500"
                     />
 
                 </svg>
