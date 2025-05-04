@@ -7,8 +7,8 @@ const App = () => {
 
     const [id, setId] = useState('')
     const [modal, setModal] = useState(false)
-    const [timerDown, setTimerDown] = useState(30000) // ms
-    const duration = 30000
+    const [timerDown, setTimerDown] = useState(10000) // ms
+    const duration = 10000
     const randomId = () => Math.floor(Math.random() * 100) + 1
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const App = () => {
     const progress = ((duration - timerDown) / duration) * 100
 
     const handleReset = () => {
-        setTimerDown(30000)
+        setTimerDown(10000)
         setId(randomId())
         setModal(false)
     }
