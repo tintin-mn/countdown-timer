@@ -5,8 +5,10 @@ import FooterMenu from "./components/FooterMenu.jsx";
 
 const App = () => {
 
+    const [id, setId] = useState('')
     const [timerDown, setTimerDown] = useState(30000) // ms
     const duration = 30000
+    const randomId = () => Math.floor(Math.random() * 100) + 1
 
     useEffect(() => {
         if (timerDown <= 0) return;
@@ -18,10 +20,15 @@ const App = () => {
         return () => clearInterval(interval)
     }, [timerDown])
 
+    useEffect(() => {
+        setId(randomId())
+    }, [])
+
     const progress = ((duration - timerDown) / duration) * 100
 
     const handleReset = () => {
         setTimerDown(30000)
+        setId(randomId())
     }
 
     return (
@@ -30,7 +37,7 @@ const App = () => {
                 className="flex flex-col items-center w-[80%] mx-auto gap-y-14 md:w-[30%]">
                 <header className=" space-y-3 text-center">
                     <h1 className="font-bold text-3xl tracking-wide">Order Status</h1>
-                    <p className="font-semibold text-gray-800">Order Code: #125</p>
+                    <p className="font-semibold text-gray-800">Order Code: # {id} </p>
                 </header>
                 <section className="w-full md:w-2/3 ">
                     <ProgressCircle progress={progress}/>
