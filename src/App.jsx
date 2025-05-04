@@ -6,12 +6,20 @@ import FooterMenu from "./components/FooterMenu.jsx";
 const App = () => {
 
     const [id, setId] = useState('')
+    const [modal, setModal] = useState(false)
     const [timerDown, setTimerDown] = useState(30000) // ms
     const duration = 30000
     const randomId = () => Math.floor(Math.random() * 100) + 1
 
     useEffect(() => {
-        if (timerDown <= 0) return;
+        if (timerDown <= 0) {
+            setModal(true)
+
+            const sound = new Audio('/sounds/ready.wav')
+            sound.play()
+
+            return
+        }
 
         const interval = setInterval(() => {
             setTimerDown(prevState => prevState - 1000)
@@ -24,11 +32,16 @@ const App = () => {
         setId(randomId())
     }, [])
 
+    const closeModal = () => {
+        setModal(false)
+    }
+
     const progress = ((duration - timerDown) / duration) * 100
 
     const handleReset = () => {
         setTimerDown(30000)
         setId(randomId())
+        setModal(false)
     }
 
     return (
@@ -47,6 +60,16 @@ const App = () => {
                     <FooterMenu onReset={handleReset}/>
                 </footer>
             </div>
+            {
+                modal && (
+                    <div className="fixed top-0 left-0 w-full h-full bg-black/50 flex items-center justify-center z-50">
+                        <div className="bg-white px-16 py-8 rounded-xl shadow-xl text-center space-y-8">
+                            <h2 className="text-xl font-bold">Your order is ready!🎉</h2>
+                            <button onClick={closeModal} className="bg-orange-700 hover:bg-orange-600 text-white py-2 px-8 rounded">OK</button>
+                        </div>
+                    </div>
+                )
+            }
         </main>
     );
 };
